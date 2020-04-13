@@ -1,0 +1,13 @@
+worker: 4
+speed_limit:
+  - from_container: worker_4
+    to_container: master
+    limit: 800
+
+  - from_container: worker_2
+    to_container: worker_4
+    limit: 600
+
+  - from_container: master
+    to_container: worker_1
+    limit: 400
