@@ -3,6 +3,8 @@ services:
   master:
     image: gettyimages/spark
     command: bin/spark-class org.apache.spark.deploy.master.Master -h master
+    cap_add:
+      - NET_ADMIN
     hostname: master
     environment:
       MASTER: spark://master:7077
@@ -27,6 +29,8 @@ services:
 
   worker:
     image: gettyimages/spark
+    cap_add:
+      - NET_ADMIN
     command: bin/spark-class org.apache.spark.deploy.worker.Worker spark://master:7077
     hostname: worker
     environment:
