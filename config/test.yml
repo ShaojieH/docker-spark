@@ -1,13 +1,17 @@
 worker: 3 # workers are referred to by worker_{id}, master is referred to as master
 speed_limit:
-  - from_container: worker_3
-    to_container: master
-    limit: 800
+  - from_container: master
+    to_container: group_1
+    limit: 6000
 
-  - from_container: worker_2
+  - from_container: group_1
     to_container: worker_1
-    limit: 600
+    limit: 2000
+
+  - from_container: group_1
+    to_container: worker_2
+    limit: 4000
 
   - from_container: master
-    to_container: worker_2
-    limit: 400
+    to_container: worker_3
+    limit: 1000
