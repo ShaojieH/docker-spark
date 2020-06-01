@@ -1,13 +1,24 @@
-worker: 4
+worker: 3
 speed_limit:
-  - from_container: worker_4
-    to_container: master
-    limit: 800
+  - from_container: master
+    to_container: worker_3
+    limit: 1000
 
-  - from_container: worker_2
-    to_container: worker_4
-    limit: 600
+  - from_container: group_1
+    to_container: worker_1
+    limit: 3000
+
+  - from_container: group_1
+    to_container: worker_2
+    limit: 4000
 
   - from_container: master
-    to_container: worker_1
-    limit: 400
+    to_container: group_1
+    limit: 6000
+
+groups:
+  - name: group_1
+    parent: root
+    children:
+      - worker_1
+      - worker_2
