@@ -6,31 +6,27 @@ rules:
         to_container: worker_3
         limit: 1000
         prio: 0
-
       - from_container: group_1
         to_container: worker_1
         limit: 3000
         prio: 1
-
       - from_container: group_1
         to_container: worker_2
         limit: 4000
         prio: 2
-
       - from_container: master
         to_container: group_1
         limit: 6000
         prio: 3
-
     groups:
       - name: group_1
         parent: root
         children:
           - worker_1
           - worker_2
-
   - root: worker_3
     speed_limits:
       - from_container: worker_3
         to_container: worker_2
-        limit: 2345
+        limit: 123
+    groups: []
