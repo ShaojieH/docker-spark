@@ -1,39 +1,41 @@
 worker: 4 # workers are referred to by worker_{id}, master is referred to as master
-speed_limit:
-  - from_container: master
-    to_container: group_1
-    limit: 6000
+rules:
+  - root: master
+    speed_limits:
+      - from_container: master
+        to_container: group_1
+        limit: 6000
 
-  - from_container: group_1
-    to_container: worker_1
-    limit: 2000
+      - from_container: group_1
+        to_container: worker_1
+        limit: 2000
 
-  - from_container: group_1
-    to_container: group_2
-    limit: 4000
+      - from_container: group_1
+        to_container: group_2
+        limit: 4000
 
-  - from_container: group_2
-    to_container: group_2
-    limit: 2000
+      - from_container: group_2
+        to_container: group_2
+        limit: 2000
 
-  - from_container: group_2
-    to_container: worker_3
-    limit: 3000
+      - from_container: group_2
+        to_container: worker_3
+        limit: 3000
 
-  - from_container: master
-    to_container: worker_4
-    limit: 1000
+      - from_container: master
+        to_container: worker_4
+        limit: 1000
 
 
-groups:
-  - name: group_1
-    parent: root
-    children:
-      - worker_1
-      - group_2
+    groups:
+      - name: group_1
+        parent: root
+        children:
+          - worker_1
+          - group_2
 
-  - name: group_2
-    parent: group_1
-    children:
-      - worker_2
-      - worker_3
+      - name: group_2
+        parent: group_1
+        children:
+          - worker_2
+          - worker_3
