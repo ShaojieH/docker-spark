@@ -28,5 +28,6 @@ rules:
     speed_limits:
       - from_container: worker_3
         to_container: worker_2
-        limit: 123
+        limit: 1234
+        prio: 1
     groups: []
